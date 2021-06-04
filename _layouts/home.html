@@ -31,6 +31,12 @@ layout: default
             {{ post.title | escape }}
           </a>
         </h3>
+        {% assign summary = post.content | strip_html | escape %}
+        {% assign summary = summary | strip %}
+        {% assign summary = summary | slugify: "pretty" %}
+        {% assign summary = summary | truncate: 140, "" %}
+        {% assign summary = summary | capitalize %}
+        <p class="text-justify text-ellipsis-3">{{ summary | strip_html }}</p>
         {%- if site.show_excerpts -%}
           {{ post.excerpt }}
         {%- endif -%}
